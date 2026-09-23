@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinoth J S — One-Page Profile</title>
+
+  <style>
+    :root {
+      --maroon: #54151d;
+      --maroon-deep: #380d13;
+      --turmeric: #e7b52d;
+      --offwhite: #f7f0df;
+      --ink: #28191a;
+      --muted: #725f5b;
+    }
+
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--offwhite);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.4;
+    }
+
+    .print-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 16px;
+      background: var(--turmeric);
+      color: var(--maroon-deep);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(56, 13, 19, 0.15);
+    }
+
+    .page {
+      width: min(100%, 186mm);
+      min-height: 273mm;
+      margin: 20px auto;
+      padding: 15mm;
+      background: var(--offwhite);
+    }
+
+    .header {
+      border-bottom: 4px solid var(--turmeric);
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin-bottom: 5px;
+      color: var(--maroon);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--maroon-deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .intro {
+      margin: 10px 0 0;
+      color: var(--maroon);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    section {
+      margin-top: 17px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 8px;
+      color: var(--maroon);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 22px;
+      height: 3px;
+      background: var(--turmeric);
+      flex: 0 0 auto;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    .ventures {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 10px;
+    }
+
+    .venture {
+      padding: 10px 11px;
+      border-left: 3px solid var(--turmeric);
+      background: rgba(255, 255, 255, 0.38);
+    }
+
+    .venture h3 {
+      margin: 0 0 2px;
+      color: var(--maroon-deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 13.5px;
+      line-height: 1.2;
+    }
+
+    .role {
+      margin-bottom: 4px;
+      color: var(--maroon);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .venture p {
+      font-size: 10.5px;
+      line-height: 1.4;
+    }
+
+    .writing-box {
+      padding: 11px 13px;
+      background: var(--maroon);
+      color: var(--offwhite);
+    }
+
+    .writing-box p {
+      color: rgba(247, 240, 223, 0.86);
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .contact-item {
+      padding: 10px 12px;
+      border: 1px solid rgba(84, 21, 29, 0.18);
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .contact-label {
+      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contact a {
+      color: var(--maroon);
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .footer {
+      margin-top: 19px;
+      padding-top: 9px;
+      border-top: 1px solid rgba(84, 21, 29, 0.15);
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    @media screen and (max-width: 700px) {
+      .print-button {
+        position: static;
+        display: block;
+        margin: 15px auto -5px;
+      }
+
+      .page {
+        width: calc(100% - 24px);
+        min-height: auto;
+        margin: 12px auto;
+        padding: 24px 20px;
+      }
+
+      .ventures,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+    }
+
+    @media print {
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        background: #fff;
+      }
+
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .print-button {
+        display: none !important;
+      }
+
+      .page {
+        width: 100%;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+      }
+
+      .writing-box {
+        background: #fff;
+        color: var(--maroon-deep);
+        border: 1px solid var(--maroon);
+      }
+
+      .writing-box p {
+        color: var(--muted);
+      }
+
+      .venture,
+      .contact-item {
+        background: #fff;
+      }
+
+      a {
+        color: var(--maroon) !important;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <button class="print-button" onclick="window.print()">
+    Download as PDF
+  </button>
+
+  <main class="page">
+    <header class="header">
+      <div class="eyebrow">Chennai · India</div>
+      <h1>Vinoth J S</h1>
+      <p class="intro">
+        Entrepreneur, developer and Tamil cinema screenwriter.
+      </p>
+    </header>
+
+    <section>
+      <h2 class="section-title">About</h2>
+      <p>
+        I run several ventures at once from Chennai and build their tech
+        myself. I write Tamil screenplays across mass drama, psychological
+        thriller, sports drama and experimental film.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Ventures &amp; Builds</h2>
+
+      <div class="ventures">
+        <article class="venture">
+          <h3>Ads'n'Cups</h3>
+          <div class="role">Founder</div>
+          <p>
+            Hyperlocal paper cup advertising across Chennai tea stalls and
+            office pantries.
+          </p>
+        </article>
+
+        <article class="venture">
+          <h3>Vahananjal</h3>
+          <div class="role">Founder · Developer</div>
+          <p>
+            A peer-to-peer parcel delivery platform for Tamil Nadu that moves
+            parcels with train travellers; I build the platform logic.
+          </p>
+        </article>
+
+        <article class="venture">
+          <h3>The Tiger and the Fish</h3>
+          <div class="role">Creator</div>
+          <p>
+            A 2-player online co-op browser game, period adventure, in
+            English/Tamil, built with AI.
+          </p>
+        </article>
+
+        <article class="venture">
+          <h3>Stonepapers</h3>
+          <div class="role">Founder</div>
+          <p>
+            Online retail store; I redesigned the storefront for mobile
+            conversion.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Screenwriting</h2>
+
+      <div class="writing-box">
+        <p>
+          Feature and web-series scripts in development: a Malana-set
+          crime-political drama web series (8 episodes), a Vetrimaaran-register
+          drama about a dog, a sports drama, and a psychological thriller.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Contact</h2>
+
+      <div class="contact">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <a href="mailto:vinojeganjs@gmail.com">
+            vinojeganjs@gmail.com
+          </a>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">GitHub</div>
+          <a
+            href="https://github.com/vinojeganjs-lang"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.com/vinojeganjs-lang
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Vinoth J S · Chennai
+    </div>
+  </main>
+</body>
+</html>
