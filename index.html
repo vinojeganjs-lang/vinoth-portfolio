@@ -75,7 +75,8 @@
 
     .container {
       width: min(calc(100% - (var(--gutter) * 2)), var(--max));
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     body::before {
@@ -198,8 +199,7 @@
     .hero {
       position: relative;
       min-height: 100svh;
-      display: flex;
-      align-items: center;
+      display: block;
       padding: 130px 0 80px;
       background:
         linear-gradient(135deg, rgba(84, 21, 29, 0.97), rgba(56, 13, 19, 0.98)),
@@ -235,13 +235,22 @@
       border: 1px solid rgba(247, 240, 223, 0.12);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(380px, 0.88fr);
-      align-items: center;
-      gap: 55px;
+    .hero > .container:first-child {
       position: relative;
       z-index: 2;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+      align-items: center;
+      gap: 55px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .hero-grid > * {
+      min-width: 0;
     }
 
     .eyebrow {
@@ -328,6 +337,7 @@
     .hero-card {
       position: relative;
       width: 100%;
+      min-width: 0;
       min-height: 470px;
       padding: 30px;
       border: 1px solid rgba(255, 250, 240, 0.16);
@@ -360,6 +370,7 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 20px;
+      min-width: 0;
     }
 
     .poster-label {
@@ -965,8 +976,7 @@
       }
 
       *,
-      *::before,
-      *::after {
+      *::before {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
@@ -980,7 +990,6 @@
     }
   </style>
 
-  <!-- JS is enabled early so the reveal animation is progressive enhancement only. -->
   <script>
     document.documentElement.classList.add("js-ready");
   </script>
@@ -1018,44 +1027,46 @@
   <main>
     <!-- HOME -->
     <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <div class="eyebrow">Chennai · India</div>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <div class="eyebrow">Chennai · India</div>
 
-          <h1>
-            I build things.<br />
-            I write <span>stories.</span>
-          </h1>
+            <h1>
+              I build things.<br />
+              I write <span>stories.</span>
+            </h1>
 
-          <p class="hero-copy">
-            I’m Vinoth J S, a Chennai-based entrepreneur, developer and Tamil
-            cinema screenwriter. I build ventures from the ground up and write
-            stories across mass drama, psychological thriller, sports drama
-            and experimental film.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#ventures">Explore my work</a>
-            <a class="btn btn-secondary" href="#contact">Get in touch</a>
-          </div>
-        </div>
-
-        <aside class="hero-card reveal" aria-label="Portfolio introduction">
-          <div class="poster-top">
-            <div class="poster-label">Entrepreneur / Developer / Screenwriter</div>
-            <div class="poster-sigil">VJ</div>
-          </div>
-
-          <div class="poster-copy">
-            <div class="mini">Built from Chennai</div>
-            <h2>Ideas into ventures. Thoughts into stories.</h2>
-            <p>
-              A portfolio of businesses, digital products and screenplays in
-              development.
+            <p class="hero-copy">
+              I’m Vinoth J S, a Chennai-based entrepreneur, developer and Tamil
+              cinema screenwriter. I build ventures from the ground up and write
+              stories across mass drama, psychological thriller, sports drama
+              and experimental film.
             </p>
-            <span class="poster-stamp">Selected work</span>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#ventures">Explore my work</a>
+              <a class="btn btn-secondary" href="#contact">Get in touch</a>
+            </div>
           </div>
-        </aside>
+
+          <aside class="hero-card reveal" aria-label="Portfolio introduction">
+            <div class="poster-top">
+              <div class="poster-label">Entrepreneur / Developer / Screenwriter</div>
+              <div class="poster-sigil">VJ</div>
+            </div>
+
+            <div class="poster-copy">
+              <div class="mini">Built from Chennai</div>
+              <h2>Ideas into ventures. Thoughts into stories.</h2>
+              <p>
+                A portfolio of businesses, digital products and screenplays in
+                development.
+              </p>
+              <span class="poster-stamp">Selected work</span>
+            </div>
+          </aside>
+        </div>
       </div>
 
       <div class="container">
